@@ -5,6 +5,7 @@ public class Main {
         for (int i = 1; i <= 6; i++) {
             System.out.println("Hello world! this is for jenkis");
         }
-        System.out.println("first commit afterr jenkins config AFTER GIT "); 
+        System.out.println("first commit afterr jenkins config");
+         System.out.println("jenkinss"); 
     }
 }
