@@ -6,6 +6,6 @@ public class Main {
             System.out.println("Hello world! this is for jenkis");
         }
         System.out.println("first commit afterr jenkins config");
-         System.out.println("jenkinss"); 
+      
     }
 }
