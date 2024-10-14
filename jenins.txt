@@ -1,0 +1,212 @@
+Jenkins steps
+
+
+
+url : https://www.jenkins.io/download/
+
+go down and cick Generic Java package (.war) and download it
+
+onlce downloaded go to the path and cmd and enter below command
+
+java -jar jarname.jar or .war
+
+it will run and and show the message as Jenkins is up and running in the below
+
+Now got to browser and ente the url :  http://localhost:8080/
+
+
+It would ask the passsword to access the jenkins (That password would reflect on the same command prompt and This may also be found at: C:\Users\w138720\.jenkins\secrets\initialAdminPassword)
+
+
+Now paste the password on jenkins broswer 
+
+
+It ask you select the plugins. click on it
+
+
+
+Now Will an sample demo java program(Notepad) to jenkins worskspace by manually
+
+
+TO creat an new job==>
+
+
+T0 set global configuration like jdk ==> http://localhost:8080/manage/configureTools/
+
+
+below the jdk set the home and path:
+
+JAVA_HOME
+jdk path
+
+and click buildsteps as ==> select windows batch command shell ==> and 
+enter the executing command 
+javac filename.java 
+java filename
+
+==> save and apply
+
+
+Build the item and check whether its built succesfully
+
+Now goto the workspace path ==> C:\Users\w138720\.jenkins\workspace\JavaDemoclass and copy the class
+
+now save the file inside the created jenkinjob
+
+
+path ==> C:\Users\w138720\.jenkins\jobs
+
+copy and paste the java file in that path 
+
+
+Now click the item and build it and now click the and build and and click on the console output and see the message of the output
+
+
+To schedule period time, So that test run on like alarm
+
+
+click==>workspace or job==> configuration ==> build configuration==> click build periodically-->
+
+to set an period in format then refer this site ==> https://crontab.guru/
+
+**** ==> every min every hour and eveyedaya and month 
+0 22 * * 1-5 ==> this means ==> At 22:00 on every day-of-week from Monday through Friday.
+
+
+To schedule an build of project2 build which based on other project1 build 
+
+create a new item and copy and paste the java class in that workspace and add build steps
+
+while in build trigger checkin the Build after other projects are built? 
+
+and enter ther exixting project name which u want to be the run after 
+
+
+How to trigger build when any commit pushs happens in github
+
+We need to download https://ngrok.com/download and install and extract it and Sign it in webpage of ngrok
+
+after extracting open the ngrok or in cmd
+
+enter in the command like ngrok http 8080 (8080 is localhostserver)
+
+
+C:\Users\w138720\Downloads\ngrok-v3-stable-windows-amd64>ngrok http 8080
+
+it would provide an url with prefix of fowarding and click it 
+
+once u laucnhed the url jenkins would open in this url like local host 
+
+note down that url.
+
+
+Also we need to git plugin for jenkins
+
+now goto Jenkins ==> manage jenkins==> plugins==> available plugins ==> type git ==> and check in the git server and install
+
+Adding path to jenkins:
+
+Click manage jenkins ==> git installation==> name as default or something and path should end with .git.exe like "C:\Program Files\Git\bin\git.exe"
+
+apply and save
+
+
+Now Need to add the git repo in jenkins
+
+in item ==> configuration ==> source managemnet ==> checkin as git and paste the https url of git repo and select repo credentials (Optional)
+
+ and select build trigger as "GitHub hook trigger for GITScm polling"
+
+Now need to configure webhook in github
+
+goto repo===> /settings/hooks/new ==> payload url==> enter the url provided by hgrok as above and add / webhook-git
+
+content type as application wwwform and something
+
+
+and select Which events would you like to trigger this webhook? as Just the push event. and click Addwebhook
+
+
+
+
+Deploying the webapp (War file) in server (Tomcat) manually
+
+intall tomacat in machine and extract 
+
+We already using jenkins in localhost 8080 . we need to configure diffrerent port for tomcat
+
+tomcat ==>  conf ==>server.xml
+
+in the <connector port ="8080"...
+
+tomcat==>bin==> startup (Window batch fil)
+
+It would open an command prompt 
+
+now go to chrome and enter the url http://localhost:8081/
+
+it would open tomacat webapp
+
+
+Now adding war file to tomcat
+download any webapp from github and extract it look for war file or goto the project path and open cmd and enter the below command
+
+mvn clean package  --> this would create an war file in the target directory
+
+copy the .war file and paste it on tomcat==> webapp and paste it
+
+now goto the browser http http://localhost:8081/warfilename
+
+
+
+Deploying war file in jenkins
+
+We need an pluging called git with container in jenkins 
+
+download and restart
+
+
+adding credentials in tomcat
+
+Tomcat==>conf==> click tomcat users.xml
+
+on that paste <role rolename="manager-script"/>
+<role rolename="manager-gui"/>
+<role username="admin" password="admin" roles="manager-script,manager-gui"/>
+
+inside </tomcat-users> and save
+
+need to remove an error causing thing from tomcat (Important)
+
+tomacat==>webapp==>manager==>meta-inf==> open context.xml
+
+in that xml find the <context tag and remove the value until hasmap in inside the </contxt> tag 
+
+
+creat an item and goto postbuild steps
+
+enter the war file name like WebApp.war
+
+contex path as WebApp
+
+Container as TOmcat 9.x (diff in version)
+
+credentials ==> add ==> select admin (What we configured in xml file of tomcat)
+
+
+and enter the tomcatUrl -==> http://localhost:8081/
+
+
+Now paste the .war file in the jenkins workspace path
+
+Now build the item and go to local 8080 and 
+
+http://localhost:8081/webApp(war file name)
+
+
+
+
+
+
+
+
